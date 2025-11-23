@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { montserrat } from "@/src/fonts/Montserrat";
 import "../src/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+      <body
+        style={montserrat.style}
+        className="bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+      >
         {children}
       </body>
     </html>

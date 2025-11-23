@@ -3,19 +3,22 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Input, Button, ThemeSwitcher } from "@/src/components";
-
-import { montserrat } from "@/src/fonts/Montserrat";
+import { FaMicrosoft } from "react-icons/fa";
 import AppLogo from "@/public/app-logo.jpg";
 
 export default function HomeClient() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleMicrosoftLogin = () => {
+    setLoading(true);
+    window.location.href = "/auth/callback";
+  };
+
   return (
     <>
-      <main
-        style={montserrat.style}
-        className="flex items-center justify-between container h-screen mx-auto"
-      >
+      <main className="flex items-center justify-between container h-screen mx-auto">
         <section className="flex flex-col w-full md:w-1/2 mx-auto items-center justify-between space-y-4 px-2">
           <Image
             src={AppLogo.src}
@@ -39,9 +42,17 @@ export default function HomeClient() {
             onChange={setPassword}
           />
           <div className="w-full flex flex-row space-x-2">
-            <Button onClick={() => null}>Log In</Button>
+            <Button onClick={handleMicrosoftLogin}>Log In</Button>
             <ThemeSwitcher />
           </div>
+          <button
+            onClick={handleMicrosoftLogin}
+            disabled={loading}
+            className="w-full cursor-pointer bg-slate-800 text-slate-200 dark:bg-slate-200 dark:text-slate-800 font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-3"
+          >
+            <FaMicrosoft size={20} />
+            {loading ? "Iniciando sesión..." : "Iniciar sesión con Microsoft"}
+          </button>
         </section>
       </main>
     </>
