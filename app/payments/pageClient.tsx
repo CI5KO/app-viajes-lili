@@ -2,10 +2,13 @@
 
 import { useState, useMemo, ReactNode } from "react";
 import { Card, Input, Notification, Select, Header } from "@/src/components";
+import Loading from "../loading";
 import { Session } from "@/src/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaClock, FaTrash, FaCalendar, FaUser } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
+import { useAppDispatch } from "@/src/store/hooks";
+import { addNotification } from "@/src/store/notificationsSlice";
 
 import type { payments } from "./types";
 
@@ -58,6 +61,8 @@ export default function PaymentsPageClient({
     });
   }, [payments, statusFilter, search]);
 
+  const dispatch = useAppDispatch();
+
   async function handleAction(action: string, payment: payments) {
     try {
       setPayments(
@@ -68,23 +73,28 @@ export default function PaymentsPageClient({
           return p;
         })
       );
-      setNotification(true);
-      setNotificationData({
-        type: "ok",
+      const notifData = {
+        type: "ok" as const,
         title: `Pago ${action}`,
         description: `El pago ha sido ${action.toLocaleLowerCase()}`,
-      });
-    } catch (error) {
+      };
       setNotification(true);
-      setNotificationData({
-        type: "error",
+      setNotificationData(notifData);
+      dispatch(addNotification(notifData));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      const errorData = {
+        type: "error" as const,
         title: "Error",
         description: "Ha ocurrido un error al actualizar el pago",
-      });
+      };
+      setNotification(true);
+      setNotificationData(errorData);
+      dispatch(addNotification(errorData));
     }
   }
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <Loading />;
   if (error) return <div>Error loading payments</div>;
 
   return (

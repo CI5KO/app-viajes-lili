@@ -5,9 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Session } from "@/src/lib/auth";
-import { ThemeSwitcher } from "..";
 import AppLogo from "@/public/app-logo.jpg";
-import { MdOutlineLogout } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
 import { SideBar } from "..";
 
@@ -21,11 +19,7 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <>
-      <SideBar
-        session={session}
-        isOpen={isSideBarOpen}
-        onClose={() => setIsSideBarOpen(false)}
-      />
+      <SideBar isOpen={isSideBarOpen} onClose={() => setIsSideBarOpen(false)} />
       <header className="flex justify-between items-center p-4 mb-8 bg-gray-100 dark:bg-gray-900 text-slate-800 dark:text-slate-200">
         <div className="flex flex-row items-center space-x-2">
           <Image
