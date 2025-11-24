@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Viajes Lili Prueba
 
-## Getting Started
+Héctor Omar Oliva Gutierrez
 
-First, run the development server:
+A quien corresponda.
+Este proyecto ha sido con fines laborales.
+
+Proyecto Next Js con las siguientes técnologias
+
+- Next Js 16
+- React 19
+- Typescript
+- Tailwind CSS 4
+- Chart Js
+- React Query
+- Redux
+- Storybook
+- Jest
+- Docker
+- Docker Compose
+- PWA
+- eslint
+- prettier (Localmente)
+
+Se ha utilizado IA para mock de datos. (Datos dummy)
+
+## Setup
+
+### Proyecto
+
+Instalar Dependencias
+
+```bash
+npm instal
+# ó
+npm i
+# ó
+docker compose up build
+```
+
+Correr proyecto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# ó
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Storybook
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run storybook
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Jest
 
-## Learn More
+```bash
+npm run test
+# correr test especifico
+npm run test Button.test
+```
 
-To learn more about Next.js, take a look at the following resources:
+Si es requerido y existe la posibilidad de realizar cambios,
+Se pueden comunicar conmigo mediante email y WhatsApp.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tiempo estimado dedicado: 10 horas.

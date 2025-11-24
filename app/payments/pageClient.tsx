@@ -3,6 +3,7 @@
 import { useState, useMemo, ReactNode } from "react";
 import { Card, Input, Notification, Select, Header } from "@/src/components";
 import Loading from "../loading";
+import Error from "./Error";
 import { Session } from "@/src/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaClock, FaTrash, FaCalendar, FaUser } from "react-icons/fa";
@@ -95,7 +96,7 @@ export default function PaymentsPageClient({
   }
 
   if (isPending) return <Loading />;
-  if (error) return <div>Error loading payments</div>;
+  if (error) return <Error error={error} session={session} />;
 
   return (
     <>
