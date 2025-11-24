@@ -63,4 +63,9 @@ npm run test Button.test
 Si es requerido y existe la posibilidad de realizar cambios,
 Se pueden comunicar conmigo mediante email y WhatsApp.
 
-Tiempo estimado dedicado: 10 horas.
+Tiempo estimado dedicado: 11 horas.
+
+### Ultimos Cambios
+
+Quise ver el tema de seguridad al final para agilizar el desarrollo.
+Claro que esto también era requerimiento, por ende quise darme mi tiempo viendo foros y aprendiendo cosas que estaban diferentes con versiones recientes con next y buenas prácticas.

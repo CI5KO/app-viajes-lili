@@ -1,6 +1,20 @@
+import { cookies } from "next/headers";
+
 export async function GET() {
   // Simulamos la data que recebiriamos desde una API
   // Estos datos mock fueron solitiados por IA para agilizar el desarrollo
+
+  const cookieStore = await cookies();
+  const session = cookieStore.get(
+    process.env.COOKIE_NAME || "viajes_lili_session"
+  );
+
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
   const payments = [
     {

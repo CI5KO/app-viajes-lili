@@ -4,7 +4,7 @@ import { Card, Header } from "@/src/components";
 import { Session } from "@/src/lib/auth";
 
 interface ErrorProps {
-  error: Error;
+  error: string;
   session: Session;
 }
 
@@ -16,7 +16,7 @@ export default function Error({ error, session }: ErrorProps) {
         <Card>
           <div className="text-center text-red-500">
             <h1 className="text-2xl font-bold">Error</h1>
-            <p>{error.message}</p>
+            <p>{error}</p>
           </div>
         </Card>
       </main>

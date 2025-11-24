@@ -3,7 +3,7 @@
 import { useState, useMemo, ReactNode } from "react";
 import { Card, Input, Notification, Select, Header } from "@/src/components";
 import Loading from "../loading";
-import Error from "./Error";
+import ErrorComponent from "./Error";
 import { Session } from "@/src/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaClock, FaTrash, FaCalendar, FaUser } from "react-icons/fa";
@@ -32,6 +32,7 @@ const statusIcons: Record<string, ReactNode> = {
 export default function PaymentsPageClient({
   session,
 }: PaymentsPageClientProps) {
+  const [csrfToken, setCsrfToken] = useState<string>("");
   const [payments, setPayments] = useState<payments[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>("Todos");
   const [search, setSearch] = useState<string>("");
@@ -64,8 +65,25 @@ export default function PaymentsPageClient({
 
   const dispatch = useAppDispatch();
 
+  const { data: csrfData } = useQuery({
+    queryKey: ["csrf"],
+    queryFn: () => fetch("/api/csrf").then((res) => res.json()),
+  });
+
+  if (csrfData && !csrfToken) {
+    setCsrfToken(csrfData.csrfToken);
+  }
+
   async function handleAction(action: string, payment: payments) {
     try {
+      const response = await fetch("/api/payments/actions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ csrfToken, paymentId: payment.id, action }),
+      });
+
+      if (!response.ok) throw Error("Failed to update payment");
+
       setPayments(
         payments.map((p) => {
           if (p.id === payment.id) {
@@ -96,7 +114,7 @@ export default function PaymentsPageClient({
   }
 
   if (isPending) return <Loading />;
-  if (error) return <Error error={error} session={session} />;
+  if (error) return <ErrorComponent error={error.message} session={session} />;
 
   return (
     <>

@@ -1,13 +1,36 @@
 "use server";
 
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "./src/lib/rateLimit";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const ip =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
 
-  const session = request.cookies.get(
+  if (pathname.startsWith("/api/")) {
+    if (!rateLimit(ip, 100, 60000)) {
+      return new NextResponse(JSON.stringify({ error: "Too many requests" }), {
+        status: 429,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }
+
+  const sessionCookie = request.cookies.get(
     process.env.COOKIE_NAME || "viajes_lili_session"
   );
+
+  let session = null;
+  if (sessionCookie) {
+    try {
+      session = JSON.parse(sessionCookie.value);
+    } catch {
+      session = null;
+    }
+  }
 
   if (
     pathname.includes(".") ||
