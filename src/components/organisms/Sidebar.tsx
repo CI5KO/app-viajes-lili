@@ -99,12 +99,13 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
       </section>
       <section className="w-full flex flex-row justify-between items-center space-x-2 absolute bottom-4">
         <ThemeSwitcher />
-        <form
-          action="/auth/logout"
-          method="GET"
-          className="text-2xl bg-red-500 rounded-lg py-2 px-6 cursor-pointer mr-8 sm:mr-6"
-        >
-          <MdOutlineLogout />
+        <form action="/auth/logout" method="GET">
+          <button
+            type="submit"
+            className="text-2xl bg-red-500 rounded-lg py-2 px-6 cursor-pointer mr-8 sm:mr-6 hover:bg-red-600 transition-colors"
+          >
+            <MdOutlineLogout />
+          </button>
         </form>
       </section>
     </aside>
